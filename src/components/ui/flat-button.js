@@ -1,29 +1,34 @@
 import React from 'react';
-import FormComponent from './form-component';
+import PropTypes from 'prop-types';
 
-export default class FlatButton extends React.Component {
-    constructor(props) {
-        super(props);
+import { withRouter } from 'react-router-dom'
 
-        this.onClickCity = this.onClickCity.bind(this);
-    }
-    onClickCity(e) {
+class FlatButton extends React.Component {
+    
+    onPressed(e) {
         e.preventDefault();
-        return(<FormComponent />);
-    }
-
-    onClickCountry(e) {
-        e.preventDefault();
-        return(<FormComponent />);
+        const { link, buttonPressesd } = this.props;
+        if(link) {
+            this.props.history.push(link);
+        }
+        if(buttonPressesd) {
+            buttonPressesd(e);
+        }
     }
 
     render() {
+        const { title } = this.props;
         return (
-            <div>
-                <button className="flat-button" onClick={this.onClickCity}>Search By City</button>
-                <button className="flat-button" onClick={this.onClickCountry}>Search By Country</button>
-            </div>    
+            <button className="flat-button" onClick={(e) => this.onPressed(e)}>{title}</button>
         );
     }
+}
 
+export default withRouter(FlatButton);
+
+FlatButton.propTypes = {
+    title: PropTypes.string.isRequired,
+    buttonPressesd: PropTypes.func,
+    link: PropTypes.string,
+    isSubmitButton: PropTypes.bool 
 }

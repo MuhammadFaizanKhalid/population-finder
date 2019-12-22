@@ -1,19 +1,21 @@
 import React from 'react';
 import FlatButton from './ui/flat-button';
+import Page from './ui/page';
 
 export default class HomeComponent extends React.Component {
 
     render() {
         return (
-            <div className='page'>
-                <div className='page-heading'>
-                    <h1>City Pop</h1>
-                    <h3>Search by cities</h3>
-                </div>
-                <div className='page-content'>
-                    <FlatButton />
-                </div>
-            </div>
+            <Page title="Population Finder">
+                <FlatButton 
+                    title="Search By City"
+                    link="/city-search"
+                />
+                <FlatButton 
+                    title="Search By Country"
+                    link="/country-search"
+                />
+            </Page>
         );
     }
 

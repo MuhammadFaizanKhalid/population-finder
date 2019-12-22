@@ -1,4 +1,3 @@
-
 body {
     margin: 0;
     padding: 0;
@@ -55,4 +54,90 @@ body {
 .flat-button:hover {
     background-color: #FEFEFE;
     color: #292929;
+}
+
+.input-field-wrapper {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #292929;
+    border-radius: 7px;
+}
+.input-field {
+    display: block;
+    width: calc(100% - 40px);
+    padding: 7px 10px;
+    margin: 7px;
+    background: #FFFFFF;
+    color: #292929;
+    font-size: 18px;
+    outline: none;
+    border: none;
+}
+.input-field-icon {
+    margin: 0;
+    padding: 0;
+    padding-right: 12px;
+    padding-left: 10px;
+    min-width: 40px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    font-size: 22px;
+    color: #FEFEFE;
+    border: none;
+    background: #292929;
+    border-radius: 0px 7px 7px 0px;
+    outline: none;
+    cursor: pointer;
+}
+
+.searched-list {
+    padding: 0;
+    max-width: 300px;
+    max-height: 300px;
+    margin: 0 auto;
+    margin-top: 20px;
+    overflow: auto;
+}
+
+.searched-list li {
+    list-style-type: none;
+}
+
+.searched-list li a {
+    display: block;
+    padding: 10px 20px;
+    text-align: left;
+    text-decoration: none;
+    color: #292929;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.searched-list li a:hover {
+    color: #FEFEFE;
+    background-color: #292929;
+    border-bottom: 1px solid #292929;
+}
+
+.population-result {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #292929;
+    color: #292929;
+    margin: 0 auto;
+}
+
+.population-result h5 {
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.population-result span {
+    font-size: 22px;
 }
