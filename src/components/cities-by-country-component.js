@@ -1,26 +1,48 @@
 import React from 'react';
 import Page from './ui/page';
-import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getCitiesByCountryCode, setResult } from '../state-management/app-actions';
 
-class CitiesByCountryComponent extends React.Component {
+class CitiesListComponent extends React.Component {
+
+    componentDidMount() {
+        const { history, match, getCitiesByCountryCode } = this.props;
+        const { countryCode } = match.params;
+        if(countryCode) {
+            getCitiesByCountryCode({search: countryCode});
+        } else {
+            history.push("/");
+        }
+    }
+
+    handleCityPressed(e, geoItem) {
+        e.preventDefault();
+        this.props.setResult(geoItem);
+        this.props.history.push("/result");
+    }
+
+    mapList(list, instance) {
+        return Object
+                    .keys(list)
+                        .map(index => 
+                            <li key={list[index].geonameId}>
+                                <div onClick={e => instance.handleCityPressed(e, list[index])}>
+                                    {list[index].name}, {list[index].adminName1}
+                                </div>
+                            </li>
+                        );
+    };
 
     render(){
+        const { citiesList, selectedCountry } = this.props.appState;
         return(
-            <Page title="Population Finder" subtitle="Pakistan">
+            <Page title="Population Finder" subtitle={selectedCountry.countryName}>
                 <ul className="searched-list">
-                    <li>
-                        <a href="population-by-city/1">Karachi</a>
-                    </li>
-                    <li>
-                        <a href="population-by-city/2">Lahore</a>
-                    </li>
-                    <li>
-                        <a href="population-by-city/3">Islamabad</a>
-                    </li>
+                    { citiesList && this.mapList(citiesList, this) }
                 </ul>
             </Page>
         );
-
     }
 }
 
@@ -28,7 +50,10 @@ const mapStateToProps = state => ({
     appState: state
 });
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
-    {}
-)(CitiesByCountryComponent);
+    {
+        getCitiesByCountryCode,
+        setResult
+    }
+)(CitiesListComponent));

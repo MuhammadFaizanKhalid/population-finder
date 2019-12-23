@@ -11,6 +11,7 @@ export default class InputField extends React.Component{
                     className="input-field" 
                     type="text" 
                     placeholder="Type Here..."
+                    autoComplete="off"
                     name={name} 
                     value={value} 
                     onChange={(e) => onUpdate({name, value: e.target.value})}

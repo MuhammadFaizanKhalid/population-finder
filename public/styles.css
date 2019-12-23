@@ -106,7 +106,8 @@ body {
     list-style-type: none;
 }
 
-.searched-list li a {
+.searched-list li div {
+    cursor: pointer;
     display: block;
     padding: 10px 20px;
     text-align: left;
@@ -115,7 +116,7 @@ body {
     border-bottom: 1px solid #DDDDDD;
 }
 
-.searched-list li a:hover {
+.searched-list li div:hover {
     color: #FEFEFE;
     background-color: #292929;
     border-bottom: 1px solid #292929;

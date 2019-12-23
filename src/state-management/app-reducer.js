@@ -1,19 +1,24 @@
 import {
-    SET_CITIES_LIST,
-    SET_CITIES_SEARCH_LIST,
-    SET_COUNTRIES_SEARCH_LIST,
+    SET_LOADING,
+
     SET_CITY_SEARCH,
     SET_COUNTRY_SEARCH,
-    SET_LOADING,
+    SET_SEARCH_LIST,
+    
+    SET_SELECTED_COUNTRY,
+    SET_CITIES_LIST,
+
+    SET_RESULT_OBJECT
 } from './app-actions';
 
 const inititalState = {
-    is_loading          : false,
-    citiesList          : {},
-    citySearchList      : {},
-    countrySearchList   : {}, 
-    citySearch          : "",
-    countrySearch       : "",
+    is_loading              : false,
+    citiesList              : {},
+    searchList              : {},
+    result                  : {}, 
+    selectedCountry         : {},
+    citySearch              : "",
+    countrySearch           : "",
 };
   
 const AppReducer = (state = inititalState, action) => {
@@ -32,17 +37,10 @@ const AppReducer = (state = inititalState, action) => {
             };
             break;
         }
-        case SET_CITIES_SEARCH_LIST: {
+        case SET_SEARCH_LIST: {
             state = {
                 ...state,
-                citySearchList: action.payload,
-            };
-            break;
-        }
-        case SET_COUNTRIES_SEARCH_LIST: {
-            state = {
-                ...state,
-                countrySearchList: action.payload,
+                searchList: action.payload,
             };
             break;
         }
@@ -58,6 +56,20 @@ const AppReducer = (state = inititalState, action) => {
                 ...state,
                 countrySearch: action.payload,
             };
+            break;
+        }
+        case SET_RESULT_OBJECT: {
+            state = {
+                ...state,
+                result: action.payload
+            }
+            break;
+        }
+        case SET_SELECTED_COUNTRY: {
+            state = {
+                ...state,
+                selectedCountry: action.payload
+            }
             break;
         }
         default: {

@@ -1,9 +1,9 @@
 import React from 'react';
 import Page from './ui/page';
-import { Link } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import InputField from './ui/input-field';
 import { connect } from 'react-redux';
-import { setCitySearch, getCitiesByName } from '../state-management/app-actions';
+import { setCitySearch, getCitiesByName, setResult } from '../state-management/app-actions';
 
 class CitySearchComponent extends React.Component {
 
@@ -14,23 +14,26 @@ class CitySearchComponent extends React.Component {
         }
     }
 
-    mapList(list) {
+    handleCityPressed(e, geoItem) {
+        e.preventDefault();
+        this.props.setResult(geoItem);
+        this.props.history.push("/result");
+    }
+
+    mapList(list, instance) {
         return Object
                     .keys(list)
                         .map(index => 
                             <li key={list[index].geonameId}>
-                                <p onClick={this}>
+                                <div onClick={e => instance.handleCityPressed(e, list[index])}>
                                     {list[index].name}, {list[index].adminName1}, {list[index].countryName}
-                                </p>
-                                {/* <Link to={"result/"+list[index].geonameId}>
-                                    {list[index].name}, {list[index].adminName1}, {list[index].countryName}
-                                </Link> */}
+                                </div>
                             </li>
                         );
     };
 
     render(){
-        const { citySearch, citySearchList } = this.props.appState;
+        const { citySearch, searchList } = this.props.appState;
         return(
             <Page title="Population Finder" subtitle="Search By City">
                 <InputField 
@@ -42,23 +45,22 @@ class CitySearchComponent extends React.Component {
                     onUpdate={(e) => this.handleInputChange(e)}
                 />
                 <ul className="searched-list">
-                    { citySearchList && this.mapList(citySearchList) }
+                    { searchList && this.mapList(searchList, this) }
                 </ul>
             </Page>
         );
-
     }
-
 }
 
 const mapStateToProps = state => ({
     appState: state
 });
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     {
         setCitySearch,
-        getCitiesByName
+        getCitiesByName,
+        setResult
     }
-)(CitySearchComponent);
+)(CitySearchComponent));

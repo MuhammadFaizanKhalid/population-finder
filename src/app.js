@@ -18,21 +18,11 @@ export default class App extends React.Component {
         return (
             <Router>
                 <Switch>
-                    <Route path='/result/:id'>
-                        <PopulationResultComponent />
-                    </Route>
-                    <Route path='/country'>
-                        <CitiesByCountryComponent />
-                    </Route>
-                    <Route path="/country-search">
-                        <CountrySearchComponent />
-                    </Route>
-                    <Route path="/city-search">
-                        <CitySearchComponent />
-                    </Route>
-                    <Route path="/">
-                        <HomeComponent />
-                    </Route>
+                    <Route path='/result' component={PopulationResultComponent} />
+                    <Route path='/country/:countryCode' component={CitiesByCountryComponent} exact={false}/>
+                    <Route path="/country-search" component={CountrySearchComponent} />
+                    <Route path="/city-search" component={CitySearchComponent} />
+                    <Route path="/" component={HomeComponent} />
                 </Switch>
             </Router>
         )
